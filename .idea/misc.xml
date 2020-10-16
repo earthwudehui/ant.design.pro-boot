@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/../staffjoy/pom.xml" />
+        <option value="$PROJECT_DIR$/../mall-swarm/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/../mall-swarm/mall-admin/pom.xml" />
+        <option value="$PROJECT_DIR$/../mall-swarm/mall-auth/pom.xml" />
+        <option value="$PROJECT_DIR$/../mall-swarm/mall-common/pom.xml" />
+        <option value="$PROJECT_DIR$/../mall-swarm/mall-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/../mall-swarm/mall-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/../mall-swarm/mall-mbg/pom.xml" />
+        <option value="$PROJECT_DIR$/../mall-swarm/mall-monitor/pom.xml" />
+        <option value="$PROJECT_DIR$/../mall-swarm/mall-portal/pom.xml" />
+        <option value="$PROJECT_DIR$/../mall-swarm/mall-search/pom.xml" />
+        <option value="$PROJECT_DIR$/../staffjoy/account-api/pom.xml" />
+        <option value="$PROJECT_DIR$/../staffjoy/account-svc/pom.xml" />
+        <option value="$PROJECT_DIR$/../staffjoy/bot-api/pom.xml" />
+        <option value="$PROJECT_DIR$/../staffjoy/bot-svc/pom.xml" />
+        <option value="$PROJECT_DIR$/../staffjoy/common-lib/pom.xml" />
+        <option value="$PROJECT_DIR$/../staffjoy/company-api/pom.xml" />
+        <option value="$PROJECT_DIR$/../staffjoy/company-svc/pom.xml" />
+        <option value="$PROJECT_DIR$/../staffjoy/faraday/pom.xml" />
+        <option value="$PROJECT_DIR$/../staffjoy/ical-svc/pom.xml" />
+        <option value="$PROJECT_DIR$/../staffjoy/mail-api/pom.xml" />
+        <option value="$PROJECT_DIR$/../staffjoy/mail-svc/pom.xml" />
+        <option value="$PROJECT_DIR$/../staffjoy/sms-api/pom.xml" />
+        <option value="$PROJECT_DIR$/../staffjoy/sms-svc/pom.xml" />
+        <option value="$PROJECT_DIR$/../staffjoy/web-app/pom.xml" />
+        <option value="$PROJECT_DIR$/../staffjoy/whoami-api/pom.xml" />
+        <option value="$PROJECT_DIR$/../staffjoy/whoami-svc/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/gateway/pom.xml" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_14" default="false" project-jdk-name="14" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
