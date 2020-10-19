@@ -37,7 +37,7 @@ public class LoginController {
             result.put("currentAuthority","guest");
             result.put("errMsg", "账号错误");
         }
-        System.out.print(JSON.toJSONString(result));
+        System.out.println(JSON.toJSONString(result));
         return JSON.toJSONString(result);
     }
 
@@ -47,5 +47,25 @@ public class LoginController {
         System.out.println("captcha");
 
         return "Hello World!!!!!!!!" ;
+    }
+
+
+    /**
+     *  ant.d.pro  退出请求
+     * @param request
+     * @return
+     */
+    @PostMapping ("/outLogin")
+    public  String  outLogin(HttpServletRequest request,@RequestBody Map<String, String> date) {
+
+        String token = date.get("userid");
+        System.out.println("outLogin:----"+token);
+
+        if(org.springframework.util.StringUtils.isEmpty(token)||token.equals("null")){
+            return null;
+        }else{
+
+        }
+        return "ok";
     }
 }

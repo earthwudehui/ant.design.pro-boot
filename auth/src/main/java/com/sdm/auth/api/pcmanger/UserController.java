@@ -13,18 +13,20 @@ import java.util.Map;
 public class UserController {
 
 
-    @GetMapping ("/currentUser")
-    public  String  currentUser(HttpServletRequest request,String token) {
+    @PostMapping ("/currentUser")
+    public  String  currentUser(HttpServletRequest request,@RequestBody Map<String, String> date) {
+        String userid = date.get("userid");
 
-        System.out.println("token:----"+token);
-        if(StringUtils.isEmpty(token)){
+        System.out.println("currentUser:----"+userid);
+
+        if(StringUtils.isEmpty(userid)||userid.equals("null")){
             return null;
         }
         Map<String, Object> result = new HashMap<String, Object>();
         result.put("name", "admin");
-        result.put("userid", "admin");
+        result.put("userid", userid);
         result.put("avatar", "https://shoudanmaodata.oss-cn-shanghai.aliyuncs.com/logo/logo_%E7%94%BB%E6%9D%BF%201.png");
-        System.out.print(result);
+        System.out.println(result);
         return JSON.toJSONString(result);
     }
 

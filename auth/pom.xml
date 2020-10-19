@@ -66,6 +66,15 @@
             <optional>true</optional>
         </dependency>
 
+        <!--引入支持热部署的依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional> <!-- 这个需要为 true 热部署才有效 -->
+            <scope>true</scope>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -84,6 +93,10 @@
                         </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
+                </configuration>
             </plugin>
         </plugins>
     </build>
