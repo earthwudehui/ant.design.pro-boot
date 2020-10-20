@@ -16,7 +16,7 @@ import java.util.Map;
 @RestController
 public class MenuController {
 
-    @PostMapping("/getmenu")
+    @PostMapping("/getMenu")
     public Map<String, Object> getmenu(HttpServletRequest request,@RequestBody Map<String, String> date) {
         String token = date.get("userid");
         System.out.print("getmenu:----"+token);
