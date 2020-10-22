@@ -100,21 +100,35 @@ public class UserController {
 
         // 3.2
         Map<String, Object> resultbuz2 = new HashMap<String, Object>();
-        resultbuz2.put("path","/admin");
-        resultbuz2.put("name","管理");
-        resultbuz2.put("icon","crown");
+        resultbuz2.put("path","/resmanage");
+        resultbuz2.put("name","资源管理");
+//        resultbuz2.put("icon","crown");
         resultbuz2.put("access","canAdmin");//权限
-        resultbuz2.put("component","./Admin");
 
         List<Map<String, Object>> buzlist2 = new ArrayList<>();
 
-        Map<String, Object>buzChildren2 = new HashMap<String, Object>();
-        resultLoginChildren.put("name","子菜单");
-        resultLoginChildren.put("path","/admin/sub-page");
-        resultLoginChildren.put("component","./Welcome");
-        buzlist2.add(buzChildren2);
-        resultbuz2.put("routes",listLogin);
+        Map<String, Object>buzChildren21 = new HashMap<String, Object>();
+        buzChildren21.put("name","用户管理");
+        buzChildren21.put("path","/resmanage/usermanage");
+        buzChildren21.put("component","./resmanage/usermanage");
+        buzlist2.add(buzChildren21);
+
+        Map<String, Object>buzChildren22 = new HashMap<String, Object>();
+        buzChildren22.put("name","角色管理");
+        buzChildren22.put("path","/resmanage/rolemanage");
+        buzChildren22.put("component","./Welcome");
+        buzlist2.add(buzChildren22);
+
+        Map<String, Object>buzChildren23 = new HashMap<String, Object>();
+        buzChildren23.put("name","菜单管理");
+        buzChildren23.put("path","/resmanage/resmanage");
+        buzChildren23.put("component","./ListTableList");
+        buzlist2.add(buzChildren23);
+
+
+        resultbuz2.put("routes",buzlist2);
         list.add(resultbuz2);
+
 
         //4）404
         Map<String, Object> result404 = new HashMap<String, Object>();
