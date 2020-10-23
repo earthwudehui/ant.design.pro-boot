@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx.xsd
+	">
+		
+	<!-- 数据库配置文件位置 -->  
+    <context:property-placeholder location="classpath:/mysql.properties" ignore-unresolvable="true"/> 
+	<!-- 阿里 druid数据库连接池 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">  
+         <!-- 数据库基本信息配置 -->
+         <property name="url" value="${dataSource.url}" />  
+         <property name="username" value="${dataSource.username}" />  
+         <property name="password" value="${dataSource.password}" />  
+         <property name="driverClassName" value="${dataSource.driverClassName}" />  
+         <property name="filters" value="${dataSource.filters}" />  
+   		 <!-- 最大并发连接数 -->
+         <property name="maxActive" value="${dataSource.maxActive}" />
+         <!-- 初始化连接数量 -->
+         <property name="initialSize" value="${dataSource.initialSize}" />
+         <!-- 配置获取连接等待超时的时间 -->
+         <property name="maxWait" value="${dataSource.maxWait}" />
+         <!-- 最小空闲连接数 -->
+         <property name="minIdle" value="${dataSource.minIdle}" />  
+   		 <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+         <property name="timeBetweenEvictionRunsMillis" value="${dataSource.timeBetweenEvictionRunsMillis}" />
+         <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+         <property name="minEvictableIdleTimeMillis" value="${dataSource.minEvictableIdleTimeMillis}" />  
+         <property name="validationQuery" value="${dataSource.validationQuery}" />  
+         <property name="testWhileIdle" value="${dataSource.testWhileIdle}" />  
+         <property name="testOnBorrow" value="${dataSource.testOnBorrow}" />  
+         <property name="testOnReturn" value="${dataSource.testOnReturn}" />  
+         <property name="maxOpenPreparedStatements" value="${dataSource.maxOpenPreparedStatements}" />
+         <!-- 打开removeAbandoned功能 -->
+         <property name="removeAbandoned" value="${dataSource.removeAbandoned}" />
+         <!-- 1800秒，也就是30分钟 -->
+         <property name="removeAbandonedTimeout" value="${dataSource.removeAbandonedTimeout}" />
+         <!-- 关闭abanded连接时输出错误日志 -->   
+         <property name="logAbandoned" value="${dataSource.logAbandoned}" />
+	</bean>  
+	
+	<bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">   
+    	<property name="dataSource" ref="dataSource"></property>
+ 	</bean>
+ 	
+	<!-- 拦截器方式配置事物 -->
+	<!--DAO数据-->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="merge*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="create*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="publish*" propagation="REQUIRED" />
+			<tx:method name="invalidate*" propagation="REQUIRED" />
+			<tx:method name="executeEngine*" propagation="REQUIRED" />
+			<tx:method name="batchCreate*" propagation="REQUIRED" />
+			<tx:method name="forward*" propagation="REQUIRED" />
+			<tx:method name="agree*" propagation="REQUIRED" />
+			<tx:method name="refuse*" propagation="REQUIRED" />
+			<tx:method name="complete*" propagation="REQUIRED" />
+			<tx:method name="cancel*" propagation="REQUIRED" />
+			<tx:method name="forward*" propagation="REQUIRED" />
+			<tx:method name="file*" propagation="REQUIRED" />
+			<tx:method name="modify*" propagation="REQUIRED" />
+			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="deploy*" propagation="REQUIRED" />
+			<tx:method name="find*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut id="txBaseServiceMethods" expression="execution(* com.sdm.auth.dao.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txBaseServiceMethods" />
+	</aop:config>
+	<!--业务数据-->
+    <tx:advice id="txAdviceBuz" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="start*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="find*" propagation="REQUIRED" />
+			<tx:method name="generate*" propagation="REQUIRED" />
+			<tx:method name="newtrans*" propagation="REQUIRES_NEW" />
+			<tx:method name="listtrans*" propagation="NEVER" />
+			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="cancel*" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
+    
+    <!-- 事物处理 -->
+    <aop:config>
+        <aop:pointcut id="txBaseServiceMethodsBuz" expression="execution(* com.sdm.auth.service..*.*(..))" />
+        <aop:advisor pointcut-ref="txBaseServiceMethodsBuz" advice-ref="txAdviceBuz" />
+    </aop:config>
+  
+  
+</beans>

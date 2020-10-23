@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdm.auth.dao.SysUerDao" >
+
+  <resultMap id="baseResultMap" type="com.sdm.auth.model.SysUer" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
+    <result column="login_date" property="loginDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="ResultMapWithBLOBs" type="com.sdm.auth.model.SysUer" extends="baseResultMap" >
+    <result column="photo" property="photo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <sql id="allBaseColumnList" >
+    id, name, password, real_name, email, mobile, create_by, create_date, status, login_ip, 
+    login_date, update_by, update_date, remark
+  </sql>
+
+  <sql id="allBaseColumnWhereList" >
+    <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR" >
+      <if test="name != null and name != ''" >
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="password != null and password != ''" >
+        and password = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="realName != null and realName != ''" >
+        and real_name = #{realName,jdbcType=VARCHAR}
+      </if>
+      <if test="email != null and email != ''" >
+        and email = #{email,jdbcType=VARCHAR}
+      </if>
+      <if test="mobile != null and mobile != ''" >
+        and mobile = #{mobile,jdbcType=VARCHAR}
+      </if>
+      <if test="createBy != null and createBy != ''" >
+        and create_by = #{createBy,jdbcType=VARCHAR}
+      </if>
+      <if test="createDate != null and createDate != ''" >
+        and create_date = #{createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="status != null and status != ''" >
+        and status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="loginIp != null and loginIp != ''" >
+        and login_ip = #{loginIp,jdbcType=VARCHAR}
+      </if>
+      <if test="loginDate != null and loginDate != ''" >
+        and login_date = #{loginDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateBy != null and updateBy != ''" >
+        and update_by = #{updateBy,jdbcType=VARCHAR}
+      </if>
+      <if test="updateDate != null and updateDate != ''" >
+        and update_date = #{updateDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="remark != null and remark != ''" >
+        and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </sql>
+
+  <sql id="Blob_Column_List" >
+    photo
+  </sql>
+
+  <select id="findById" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" flushCache="true" >
+    select 
+    <include refid="allBaseColumnList" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="findAllList" resultMap="ResultMapWithBLOBs" parameterType="com.sdm.auth.model.SysUer" flushCache="true" >
+    select 
+    <include refid="allBaseColumnList" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_user
+    <include refid="allBaseColumnWhereList" />
+  </select>
+
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.sdm.auth.model.SysUer" >
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null and id != ''" >
+        id,
+      </if>
+      <if test="name != null and name != ''" >
+        name,
+      </if>
+      <if test="password != null and password != ''" >
+        password,
+      </if>
+      <if test="realName != null and realName != ''" >
+        real_name,
+      </if>
+      <if test="email != null and email != ''" >
+        email,
+      </if>
+      <if test="mobile != null and mobile != ''" >
+        mobile,
+      </if>
+      <if test="createBy != null and createBy != ''" >
+        create_by,
+      </if>
+      <if test="createDate != null and createDate != ''" >
+        create_date,
+      </if>
+      <if test="status != null and status != ''" >
+        status,
+      </if>
+      <if test="loginIp != null and loginIp != ''" >
+        login_ip,
+      </if>
+      <if test="loginDate != null and loginDate != ''" >
+        login_date,
+      </if>
+      <if test="updateBy != null and updateBy != ''" >
+        update_by,
+      </if>
+      <if test="updateDate != null and updateDate != ''" >
+        update_date,
+      </if>
+      <if test="remark != null and remark != ''" >
+        remark,
+      </if>
+      <if test="photo != null and photo != ''" >
+        photo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null and id != ''" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null and name != ''" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null and password != ''" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null and realName != ''" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null and email != ''" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null and mobile != ''" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null and createBy != ''" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null and createDate != ''" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null and status != ''" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null and loginIp != ''" >
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="loginDate != null and loginDate != ''" >
+        #{loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null and updateBy != ''" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null and updateDate != ''" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null and remark != ''" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null and photo != ''" >
+        #{photo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="com.sdm.auth.model.SysUer" >
+    update sys_user
+    <trim prefix="SET" suffixOverrides="," >
+      <if test="name != null and name != ''" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null and password != ''" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null and realName != ''" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null and email != ''" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null and mobile != ''" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null and createBy != ''" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null and createDate != ''" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null and status != ''" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="loginIp != null and loginIp != ''" >
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="loginDate != null and loginDate != ''" >
+        login_date = #{loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null and updateBy != ''" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null and updateDate != ''" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null and remark != ''" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null and photo != ''" >
+        photo = #{photo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sdm.auth.model.SysUer" >
+    update sys_user
+    set name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      login_ip = #{loginIp,jdbcType=VARCHAR},
+      login_date = #{loginDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

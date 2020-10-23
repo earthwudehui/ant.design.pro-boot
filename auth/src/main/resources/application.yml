@@ -1,2 +1,14 @@
 server:
   port: 9000
+
+mybatis:
+  #configLocation: classpath:mybatis/mybatis-config.xml #mybatis配置
+  mapperLocations: classpath*:/mybatis/*Mapper.xml      #mapper扫描
+  type-aliases-package: com.sdm.auth.model          #model扫描
+
+#pagehelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

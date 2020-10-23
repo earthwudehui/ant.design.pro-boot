@@ -1,9 +1,12 @@
 package com.sdm.auth.api.pcmanger;
 
 import com.alibaba.fastjson.JSON;
+import com.sdm.auth.dao.SysUerDao;
+import com.sdm.auth.model.SysUer;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,10 +18,13 @@ import java.util.Map;
 public class UserController {
 
 
+    @Resource
+    private SysUerDao sysUserDao;
+
     @PostMapping ("/currentUser")
     public  String  currentUser(HttpServletRequest request,@RequestBody Map<String, String> date) {
         String userid = date.get("userid");
-
+        List<SysUer> list1 = sysUserDao.findAllList();
         System.out.println("currentUser:----"+userid);
 
         if(StringUtils.isEmpty(userid)||userid.equals("null")){
