@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdm.auth.dao.SysRoleDao" >
+  <!-- mapper基础标准: 当前表所有字段映射结果集 -->
+  <resultMap id="baseResultMap" type="com.sdm.auth.model.po.SysRole" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <!-- mapper基础标准: 当前表所有字段结果集 -->
+  <sql id="allBaseColumnList" >
+    id, role, description
+  </sql>
+
+  <!-- mapper基础标准: 当前表所有字段查询条件集 -->
+  <sql id="allBaseColumnWhereList" >
+    <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR" >
+      <if test="role != null and role != ''" >
+        and role = #{role,jdbcType=VARCHAR}
+      </if>
+      <if test="description != null and description != ''" >
+        and description = #{description,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- mapper基础标准: 通用单表主键查询 -->
+  <select id="findById" resultMap="baseResultMap" parameterType="java.lang.Long" flushCache="true" >
+    select 
+    <include refid="allBaseColumnList" />
+    from sys_role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <!-- mapper基础标准: 通用单表全字段查询 -->
+  <select id="findAllList" resultMap="baseResultMap" parameterType="com.sdm.auth.model.po.SysRole" flushCache="true" >
+    select 
+    <include refid="allBaseColumnList" />
+    from sys_role
+    <include refid="allBaseColumnWhereList" />
+  </select>
+
+  <!-- mapper基础标准: 主键删除记录 -->
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from sys_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <!-- mapper基础标准: 通用单表保存 -->
+  <insert id="insert" parameterType="com.sdm.auth.model.po.SysRole" useGeneratedKeys="true" keyProperty="id">
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null and id != ''" >
+        id,
+      </if>
+      <if test="role != null and role != ''" >
+        role,
+      </if>
+      <if test="description != null and description != ''" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null and id != ''" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="role != null and role != ''" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null and description != ''" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <!-- mapper基础标准: 通用主键更新 -->
+  <update id="update" parameterType="com.sdm.auth.model.po.SysRole" >
+    update sys_role
+    <trim prefix="SET" suffixOverrides="," >
+      <if test="role != null and role != ''" >
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null and description != ''" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

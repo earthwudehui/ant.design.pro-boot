@@ -12,3 +12,6 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+# 打印mybatis日志
+logging.level.com.sdm.auth.dao : debug

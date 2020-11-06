@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdm.auth.dao.SysMenuDao" >
+  <!-- mapper基础标准: 当前表所有字段映射结果集 -->
+  <resultMap id="baseResultMap" type="com.sdm.auth.model.po.SysMenu" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="BIGINT" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="component" property="component" jdbcType="VARCHAR" />
+    <result column="is_show" property="isShow" jdbcType="CHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="parent_menu_id" property="parentMenuId" jdbcType="BIGINT" />
+    <result column="deletedAt" property="deletedat" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <!-- mapper基础标准: 当前表所有字段结果集 -->
+  <sql id="allBaseColumnList" >
+    id, name, sort, icon, path, component, is_show, create_date, update_date, remark, 
+    parent_menu_id, deletedAt
+  </sql>
+
+  <!-- mapper基础标准: 当前表所有字段查询条件集 -->
+  <sql id="allBaseColumnWhereList" >
+    <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR" >
+      <if test="name != null and name != ''" >
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="sort != null and sort != ''" >
+        and sort = #{sort,jdbcType=BIGINT}
+      </if>
+      <if test="icon != null and icon != ''" >
+        and icon = #{icon,jdbcType=VARCHAR}
+      </if>
+      <if test="path != null and path != ''" >
+        and path = #{path,jdbcType=VARCHAR}
+      </if>
+      <if test="component != null and component != ''" >
+        and component = #{component,jdbcType=VARCHAR}
+      </if>
+      <if test="isShow != null and isShow != ''" >
+        and is_show = #{isShow,jdbcType=CHAR}
+      </if>
+      <if test="createDate != null and createDate != ''" >
+        and create_date = #{createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateDate != null and updateDate != ''" >
+        and update_date = #{updateDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="remark != null and remark != ''" >
+        and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+      <if test="parentMenuId != null and parentMenuId != ''" >
+        and parent_menu_id = #{parentMenuId,jdbcType=BIGINT}
+      </if>
+      <if test="deletedat != null and deletedat != ''" >
+        and deletedAt = #{deletedat,jdbcType=TIMESTAMP}
+      </if>
+    </trim>
+  </sql>
+
+  <!-- mapper基础标准: 通用单表主键查询 -->
+  <select id="findById" resultMap="baseResultMap" parameterType="java.lang.Long" flushCache="true" >
+    select 
+    <include refid="allBaseColumnList" />
+    from sys_menu
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <!-- mapper基础标准: 通用单表全字段查询 -->
+  <select id="findAllList" resultMap="baseResultMap" parameterType="com.sdm.auth.model.po.SysMenu" flushCache="true" >
+    select 
+    <include refid="allBaseColumnList" />
+    from sys_menu
+    <include refid="allBaseColumnWhereList" />
+  </select>
+
+  <!-- mapper基础标准: 主键删除记录 -->
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from sys_menu
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <!-- mapper基础标准: 通用单表保存 -->
+  <insert id="insert" parameterType="com.sdm.auth.model.po.SysMenu" useGeneratedKeys="true" keyProperty="id">
+    insert into sys_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null and id != ''" >
+        id,
+      </if>
+      <if test="name != null and name != ''" >
+        name,
+      </if>
+      <if test="sort != null and sort != ''" >
+        sort,
+      </if>
+      <if test="icon != null and icon != ''" >
+        icon,
+      </if>
+      <if test="path != null and path != ''" >
+        path,
+      </if>
+      <if test="component != null and component != ''" >
+        component,
+      </if>
+      <if test="isShow != null and isShow != ''" >
+        is_show,
+      </if>
+      <if test="createDate != null and createDate != ''" >
+        create_date,
+      </if>
+      <if test="updateDate != null and updateDate != ''" >
+        update_date,
+      </if>
+      <if test="remark != null and remark != ''" >
+        remark,
+      </if>
+      <if test="parentMenuId != null and parentMenuId != ''" >
+        parent_menu_id,
+      </if>
+      <if test="deletedat != null and deletedat != ''" >
+        deletedAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null and id != ''" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null and name != ''" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null and sort != ''" >
+        #{sort,jdbcType=BIGINT},
+      </if>
+      <if test="icon != null and icon != ''" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null and path != ''" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null and component != ''" >
+        #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null and isShow != ''" >
+        #{isShow,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null and createDate != ''" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null and updateDate != ''" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null and remark != ''" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="parentMenuId != null and parentMenuId != ''" >
+        #{parentMenuId,jdbcType=BIGINT},
+      </if>
+      <if test="deletedat != null and deletedat != ''" >
+        #{deletedat,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <!-- mapper基础标准: 通用主键更新 -->
+  <update id="update" parameterType="com.sdm.auth.model.po.SysMenu" >
+    update sys_menu
+    <trim prefix="SET" suffixOverrides="," >
+      <if test="name != null and name != ''" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null and sort != ''" >
+        sort = #{sort,jdbcType=BIGINT},
+      </if>
+      <if test="icon != null and icon != ''" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null and path != ''" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null and component != ''" >
+        component = #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null and isShow != ''" >
+        is_show = #{isShow,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null and createDate != ''" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null and updateDate != ''" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null and remark != ''" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="parentMenuId != null and parentMenuId != ''" >
+        parent_menu_id = #{parentMenuId,jdbcType=BIGINT},
+      </if>
+      <if test="deletedat != null and deletedat != ''" >
+        deletedAt = #{deletedat,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

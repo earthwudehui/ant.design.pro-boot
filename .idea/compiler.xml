@@ -8,12 +8,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="analysis" />
         <module name="auth" />
-        <module name="admin" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="account-api" target="1.8" />
       <module name="account-svc" target="1.8" />
+      <module name="admin" target="1.8" />
       <module name="bot-api" target="1.8" />
       <module name="bot-svc" target="1.8" />
       <module name="common-lib" target="1.8" />

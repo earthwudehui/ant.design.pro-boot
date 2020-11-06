@@ -80,16 +80,6 @@
             <version>3.10</version>
         </dependency>
 
-        <!--对象拷贝工具 -->
-        <!--https://www.baeldung.com/java-performance-mapping-frameworks 测评-->
-        <dependency>
-            <groupId>org.modelmapper</groupId>
-            <artifactId>modelmapper</artifactId>
-            <version>2.3.8</version>
-        </dependency>
-
-
-
         <!-- Java图形验证码 -->
         <dependency>
             <groupId>com.github.whvcse</groupId>

@@ -13,25 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sdm.auth.config;
-
-import com.sdm.auth.model.dto.LoginPropertiesDTO;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+package com.sdm.auth.model.dto;
 
 /**
- * @apiNote 配置文件转换Pojo类的 统一配置 类
+ * 验证码配置枚举
+ *
  * @author: liaojinlong
- * @date: 2020/6/10 19:04
+ * @date: 2020/6/10 17:40
  */
-@Configuration
-public class ConfigBeanConfiguration {
 
-    @Bean
-    @ConfigurationProperties(prefix = "login", ignoreUnknownFields = true)
-    public LoginPropertiesDTO loginProperties() {
-        return new LoginPropertiesDTO();
-    }
-
-   }
+public enum LoginCodeEnumDTO {
+    /**
+     * 算数
+     */
+    arithmetic,
+    /**
+     * 中文
+     */
+    chinese,
+    /**
+     * 中文闪图
+     */
+    chinese_gif,
+    /**
+     * 闪图
+     */
+    gif,
+    spec
+}
