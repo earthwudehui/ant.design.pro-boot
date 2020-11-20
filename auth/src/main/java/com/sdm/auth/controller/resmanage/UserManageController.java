@@ -30,9 +30,9 @@ public class UserManageController {
     @Resource
     private ModelMapper modelMapper;
 
-    @PostMapping("/queryUser")
-    public Map<String, Object> queryUser(HttpServletRequest request, @RequestBody Map<String, Object> data) {
-        UserQuery userQuery= modelMapper.map(data.get("params"), UserQuery.class);
+    @PostMapping("/queryUserList")
+    public Map<String, Object> queryUserList(HttpServletRequest request, @RequestBody Map<String, Object> data) {
+        UserQuery userQuery= modelMapper.map(data, UserQuery.class);
         //1）分页
         PageHelper.startPage(userQuery.getCurrent() ,userQuery.getPageSize());//1,10 获取第1页，10条内容，默认查询总数count
 
@@ -45,7 +45,7 @@ public class UserManageController {
 
         // 5）返回值
         Map<String, Object> result = new HashMap<String, Object>();
-        result.put("data",list);
+        result.put("list",list);
         result.put("total",page.getTotal());
         result.put("success",true);
         result.put("pageSize",page.getPageSize());
@@ -79,11 +79,12 @@ public class UserManageController {
     /**
      * 修改用户信息
      * @param request
-     * @param userQuery
+     * @param data
      * @return
      */
     @PostMapping("/updateUser")
-    public SysUser updateUser(HttpServletRequest request,@RequestBody UserQuery userQuery) {
+    public SysUser updateUser(HttpServletRequest request, @RequestBody Map<String, Object> data) {
+        UserQuery userQuery= modelMapper.map(data.get("data"), UserQuery.class);
         return userManageService.updateSysUser(userQuery);
     }
 
